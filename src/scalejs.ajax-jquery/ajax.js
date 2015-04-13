@@ -1,12 +1,10 @@
 /*global define,console*/
 define([
     'jquery',
-    'scalejs!core',
-    'formdata'
+    'scalejs!core'
 ], function (
     jQuery,
-    core,
-    formdata
+    core
 ) {
     'use strict';
 

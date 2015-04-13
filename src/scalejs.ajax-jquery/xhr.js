@@ -14,7 +14,7 @@ define([
      * @param {Object} Object       Object with data to be posted
      * @param {Function} callback   callback function
      */
-    function ajax ( options ) {
+    function xhr ( options ) {
        var settings = merge({
             ondone: null,
             type: 'GET',
@@ -68,15 +68,10 @@ define([
         };
 
         options.data = JSON.stringify(options.data);
-        ajax(options);
+        xhr(options);
     }
-
-    // register function to backend
-    core.registerExtension({
-        ajaxxhr: {
-            requestJson : requestJson , 
-            ajax: ajax
-        }
-    });
-
+return {
+        requestJson: requestJson,
+        xhr: xhr
+    };
 });

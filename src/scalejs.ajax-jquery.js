@@ -1,7 +1,8 @@
 define([
     'scalejs!core',
-    './ajax',
-    './xhr'
+    './scalejs.ajax-jquery/ajax',
+    './scalejs.ajax-jquery/xhr',
+    './scalejs.ajax-jquery/formdata'
 ], function (
     core,
     ajax,
