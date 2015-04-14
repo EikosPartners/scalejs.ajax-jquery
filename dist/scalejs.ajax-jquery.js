@@ -1,13 +1,11 @@
 
 /*global define,console*/
-define('ajax',[
+define('scalejs.ajax-jquery/ajax',[
     'jquery',
-    'scalejs!core',
-    'formdata'
+    'scalejs!core'
 ], function (
     jQuery,
-    core,
-    formdata
+    core
 ) {
     'use strict';
 
@@ -119,7 +117,7 @@ define('ajax',[
 /*global define*/
 /*jsling sloppy: true*/
 
-define('xhr',[
+define('scalejs.ajax-jquery/xhr',[
     'scalejs!core'
 ], function (
     core
@@ -132,7 +130,7 @@ define('xhr',[
      * @param {Object} Object       Object with data to be posted
      * @param {Function} callback   callback function
      */
-    function ajax ( options ) {
+    function xhr ( options ) {
        var settings = merge({
             ondone: null,
             type: 'GET',
@@ -186,23 +184,61 @@ define('xhr',[
         };
 
         options.data = JSON.stringify(options.data);
-        ajax(options);
+        xhr(options);
     }
+return {
+        requestJson: requestJson,
+        xhr: xhr
+    };
+});
 
-    // register function to backend
-    core.registerExtension({
-        ajaxxhr: {
-            requestJson : requestJson , 
-            ajax: ajax
-        }
-    });
+/*global define*/
+/*jsling sloppy: true*/
+
+define('scalejs.ajax-jquery/formdata',[],function () {
+    'use strict';
+    var w = window;
+    if (w.FormData){
+        return;
+    }
+    function FormData() {
+        this.fake = true;
+        this.boundary = '--------FormData' + Math.random();
+        this._fields = [];
+    }
+    FormData.prototype.append = function (key, value) {
+        this._fields.push([key, value]);
+    }
+    FormData.prototype.toString = function () {
+        var boundary = this.boundary;
+        var body = '';
+        this._fields.forEach(function (field) {
+            body += '--' + boundary + '\r\n';
+            // file upload
+            if (field[1].name) {
+                var file = field[1];
+                body += 'Content-Disposition: form-data; name=\"' + field[0] + '\'; filename=\"' + file.name + '\"\r\n';
+                body += 'Content-Type: ' + file.type + '\r\n\r\n';
+                body += file.getAsBinary() + '\r\n';
+            } else {
+                body += 'Content-Disposition: form-data; name=\"' + field[0] + '\";\r\n\r\n';
+                body += field[1] + '\r\n';
+            }
+        });
+        body += '--' + boundary + '--';
+        return body;
+    }
+    w.FormData = FormData;
+
+    return FormData;
 
 });
 
 define('scalejs.ajax-jquery',[
     'scalejs!core',
-    './ajax',
-    './xhr'
+    './scalejs.ajax-jquery/ajax',
+    './scalejs.ajax-jquery/xhr',
+    './scalejs.ajax-jquery/formdata'
 ], function (
     core,
     ajax,
