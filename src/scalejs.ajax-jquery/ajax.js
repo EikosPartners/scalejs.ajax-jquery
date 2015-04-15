@@ -1,18 +1,21 @@
 /*global define,console*/
-define([
+define('scalejs.ajax-jquery/ajax', [
     'jquery',
-    'scalejs!core'
+    'scalejs!core',
+    'scalejs.reactive'
 ], function (
     jQuery,
     core
 ) {
     'use strict';
 
+    var observable = core.reactive.Observable,
+        merge = core.object.merge,
+        toArray = core.array.toArray,
+        log = core.log;
+        
     function ajax(url, opts) {
-        var observable = core.reactive.Observable,
-            merge = core.object.merge,
-            log = core.log;
-
+     
         return observable.create(function (observer) {
             /*jslint unparam: true*/
             function success(data, textStatus, jqXhr) {
@@ -105,11 +108,19 @@ define([
         console.error('url: ' + url + '?' + params);
         return ajax(url + '?' + params, undefined, options);
     }
-
+    function getMany() {
+        return core.reactive.Observable.forkJoin(toArray(arguments).map(function (arg) {
+            if (typeof arg === 'string') {
+                 return get(arg);
+            }
+            return get(arg.url, arg.data, arg.options);
+        }));
+    }
     return {
         postJson: postJson,
         postMultipart: postMultipart,
         jsonpGet: jsonpGet,
-        get: get
+        get: get,
+        getMany: getMany
     };
 });
