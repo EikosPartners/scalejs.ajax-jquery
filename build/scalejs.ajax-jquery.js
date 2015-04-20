@@ -85,19 +85,17 @@ define('scalejs.ajax-jquery/ajax', [
 
         return ajax(url, options);
     }
-
-    function postJson(url, data, options) {
+    function sendJson(url, data, options) {
         var jsonString = JSON.stringify(data);
         options = core.object.merge(options, {
-            type: 'POST',
             data: jsonString,
             contentType: 'application/json',
             processData: false
         });
-
+        
         return ajax(url, options);
     }
-
+    
     function jsonpGet(url, data, options) {
         var params = jQuery.param(data);
         options = core.object.merge(options, {
@@ -117,13 +115,14 @@ define('scalejs.ajax-jquery/ajax', [
         }));
     }
     return {
-        postJson: postJson,
+        sendJson: sendJson,
         postMultipart: postMultipart,
         jsonpGet: jsonpGet,
         get: get,
         getMany: getMany
     };
 });
+
 /*global define*/
 /*jsling sloppy: true*/
 
