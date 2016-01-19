@@ -13,9 +13,9 @@ define('scalejs.ajax-jquery/ajax', [
         merge = core.object.merge,
         toArray = core.array.toArray,
         log = core.log;
-        
+
     function ajax(url, opts) {
-     
+
         return observable.create(function (observer) {
             /*jslint unparam: true*/
             function success(data, textStatus, jqXhr) {
@@ -28,7 +28,8 @@ define('scalejs.ajax-jquery/ajax', [
                 log.error('Error: "' + errorThrown + ': ' + textStatus + ' in response to ' + url + '"');
                 observer.onError({
                     error: errorThrown,
-                    status: textStatus
+                    status: textStatus,
+                    message: jqXhr.responseText
                 });
             }
 
@@ -92,10 +93,10 @@ define('scalejs.ajax-jquery/ajax', [
             contentType: 'application/json',
             processData: false
         });
-        
+
         return ajax(url, options);
     }
-    
+
     function jsonpGet(url, data, options) {
         var params = jQuery.param(data);
         options = core.object.merge(options, {
