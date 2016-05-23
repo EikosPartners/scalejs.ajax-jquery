@@ -1,6 +1,6 @@
 {
   "name": "scalejs.ajax-jquery",
-  "version": "0.0.5",
+  "version": "0.4.5",
   "homepage": "",
   "authors": [],
   "description": "",
@@ -14,7 +14,7 @@
   "dependencies": {
     "scalejs": "lisovin/scalejs",
     "jquery": "~2.1.3",
-    "scalejs.reactive": "EikosPartners/scalejs.reactive"
+    "scalejs.reactive": "EikosPartners/scalejs.reactive#0.4.x"
   },
   "devDependencies": {
     "requirejs": "latest"
