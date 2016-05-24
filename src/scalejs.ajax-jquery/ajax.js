@@ -1,7 +1,7 @@
 /*global define,console*/
 define('scalejs.ajax-jquery/ajax', [
     'jquery',
-    'scalejs!core',
+    'scalejs.core',
     'scalejs.reactive'
 ], function (
     jQuery,

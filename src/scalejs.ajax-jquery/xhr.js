@@ -2,7 +2,7 @@
 /*jsling sloppy: true*/
 
 define([
-    'scalejs!core'
+    'scalejs.core'
 ], function (
     core
 ) {

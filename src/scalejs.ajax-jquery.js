@@ -1,5 +1,5 @@
 define([
-    'scalejs!core',
+    'scalejs.core',
     './scalejs.ajax-jquery/ajax',
     './scalejs.ajax-jquery/xhr',
     './scalejs.ajax-jquery/formdata'
