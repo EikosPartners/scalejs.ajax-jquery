@@ -1,7 +1,7 @@
 /*global define,console*/
 define('scalejs.ajax-jquery/ajax', [
     'jquery',
-    'scalejs!core',
+    'scalejs.core',
     'scalejs.reactive'
 ], function (
     jQuery,
@@ -128,7 +128,7 @@ define('scalejs.ajax-jquery/ajax', [
 /*jsling sloppy: true*/
 
 define('scalejs.ajax-jquery/xhr',[
-    'scalejs!core'
+    'scalejs.core'
 ], function (
     core
 ) {
@@ -245,7 +245,7 @@ define('scalejs.ajax-jquery/formdata',[],function () {
 });
 
 define('scalejs.ajax-jquery',[
-    'scalejs!core',
+    'scalejs.core',
     './scalejs.ajax-jquery/ajax',
     './scalejs.ajax-jquery/xhr',
     './scalejs.ajax-jquery/formdata'

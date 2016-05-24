@@ -5,14 +5,14 @@
   "authors": [],
   "description": "",
   "main": [
-    "dist/scalejs.ajax-jquery.min.js"
+    "dist/scalejs.ajax-jquery.js"
   ],
   "ignore": [
     "*",
     "!dist/*.js"
   ],
   "dependencies": {
-    "scalejs": "lisovin/scalejs",
+    "scalejs": "EikosPartners/scalejs#~0.5.1",
     "jquery": "~2.1.3",
     "scalejs.reactive": "EikosPartners/scalejs.reactive#0.4.x"
   },
